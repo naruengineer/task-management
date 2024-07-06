@@ -2,18 +2,22 @@ import { TaskDocument } from "@/models/task";
 import TaskDeleteButton from "./TaskDeleteButton/TaskDeleteButton";
 import TaskEditButton from "./TaskEditButton/TaskEditButton";
 import { useEffect } from "react";
+import TaskCompletedButton from "./TaskCompletedButton/TaskCompletedButton";
 
 interface TaskCardProps {
   task: TaskDocument;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
-  console.log(task);
   if (!task) {
     return <div>Loading...</div>; // ローディング中の表示
   }
   return (
-    <div className="w-64 h-52 p-4 bg-white rounded-md shadow-md flex flex-col justify-between">
+    <div
+      className={`w-64 h-52 p-4 bg-white rounded-md shadow-md flex flex-col justify-between ${
+        task.isCompleted ? "bg-gray-500" : ""
+      }`}
+    >
       <header>
         <h1 className="text-lg font-semibold">{task.title}</h1>
         <div className="mt-1 text-sm line-clamp-3">{task.description}</div>
@@ -29,6 +33,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           </div>
           <div className="flex gap-4">
             <TaskEditButton id={task._id} />
+            {!task.isCompleted && <TaskCompletedButton id={task._id} />}
             <TaskDeleteButton id={task._id} />
           </div>
         </div>

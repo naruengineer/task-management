@@ -1,8 +1,8 @@
 import TaskCard from "@/components/TaskCard/TaskCard";
 import { TaskDocument } from "@/models/task";
 
-const getExpiredtasks = async (): Promise<TaskDocument[]> => {
-  const response = await fetch(`${process.env.API_URL}/tasks/expired`, {
+const getIncompletedtasks = async (): Promise<TaskDocument[]> => {
+  const response = await fetch(`${process.env.API_URL}/tasks/incompleted`, {
     cache: "no-store",
   });
   if (response.status !== 200) {
@@ -12,10 +12,10 @@ const getExpiredtasks = async (): Promise<TaskDocument[]> => {
   return data.task as TaskDocument[];
 };
 
-const ExpiredTaskpage = async () => {
-  const expiredTasks = await getExpiredtasks();
+const IncompletedTaskpage = async () => {
+  const incompletedTasks = await getIncompletedtasks();
 
-  const sortedExpiredTasks = expiredTasks.sort((a, b) => {
+  const sortedIncompletedTasks = incompletedTasks.sort((a, b) => {
     return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
   });
 
@@ -23,14 +23,14 @@ const ExpiredTaskpage = async () => {
     <div className="p-8 h-full overflow-y-auto pb-24 bg-gray-400">
       <header className="flex justify-between items-center">
         <h1 className="text-2xl font-bold flex items-center border-b-2 border-gray-800">
-          Expired Tasks
+          Incompleted Tasks
         </h1>
       </header>
-      {expiredTasks.length === 0 ? (
+      {incompletedTasks.length === 0 ? (
         <p className="pt-5 font-semibold">No tasks available</p>
       ) : (
         <div className="mt-8 flex flex-wrap gap-4">
-          {sortedExpiredTasks.map((task) => (
+          {sortedIncompletedTasks.map((task) => (
             <TaskCard key={task._id} task={task} />
           ))}
         </div>
@@ -39,4 +39,4 @@ const ExpiredTaskpage = async () => {
   );
 };
 
-export default ExpiredTaskpage;
+export default IncompletedTaskpage;

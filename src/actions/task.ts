@@ -25,7 +25,7 @@ export const createTask = async (state: FormState, formData: FormData) => {
   redirect("/");
 };
 
-//タスク編集ページのロジック
+//タスク編集フォームのロジック
 export const updateTask = async (
   id: string,
   state: FormState,
@@ -47,13 +47,25 @@ export const updateTask = async (
   redirect("/");
 };
 
-//タスク削除ページのロジック
+//タスク削除ボタンのロジック
 export const deleteTask = async (id: string, state: FormState) => {
   try {
     await connectDB();
     await TaskModel.deleteOne({ _id: id });
   } catch (error) {
     state.error = "タスクの削除に失敗しました";
+    return state;
+  }
+  redirect("/");
+};
+
+//タスク完了ボタンのロジック
+export const completedTask = async (id: string, state: FormState) => {
+  try {
+    await connectDB();
+    await TaskModel.updateOne({ _id: id }, { isCompleted: true });
+  } catch (error) {
+    state.error = "タスクの完了に失敗しました";
     return state;
   }
   redirect("/");

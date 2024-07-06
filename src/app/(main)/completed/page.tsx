@@ -9,24 +9,32 @@ const getCompletedtasks = async (): Promise<TaskDocument[]> => {
     throw new Error();
   }
   const data = await response.json();
-  console.log("API response data:", data); // 追加
   return data.task as TaskDocument[];
 };
 
 const CompletedTaskpage = async () => {
   const completedTasks = await getCompletedtasks();
+
+  const sortedCompletedTasks = completedTasks.sort((a, b) => {
+    return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+  });
+
   return (
     <div className="p-8 h-full overflow-y-auto pb-24 bg-gray-400">
       <header className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold flex items-center">
-          Completed tasks
+        <h1 className="text-2xl font-bold flex items-center border-b-2 border-gray-800">
+          Completed Tasks
         </h1>
       </header>
-      <div className="mt-8 flex flex-wrap gap-4">
-        {completedTasks.map((task) => (
-          <TaskCard key={task._id} task={task} />
-        ))}
-      </div>
+      {completedTasks.length === 0 ? (
+        <p className="pt-5 font-semibold">No tasks available</p>
+      ) : (
+        <div className="mt-8 flex flex-wrap gap-4">
+          {sortedCompletedTasks.map((task) => (
+            <TaskCard key={task._id} task={task} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

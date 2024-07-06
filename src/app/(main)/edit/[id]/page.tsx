@@ -16,7 +16,6 @@ const getTask = async (id: string): Promise<TaskDocument> => {
 const EditTaskPage = async ({ params }: Params) => {
   const id = params.id;
   const task = await getTask(id);
-  console.log(task);
 
   return (
     <div className="flex flex-col justify-center py-20 ">

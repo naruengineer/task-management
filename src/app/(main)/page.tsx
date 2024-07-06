@@ -11,13 +11,18 @@ const getAlltasks = async (): Promise<TaskDocument[]> => {
     throw new Error();
   }
   const data = await response.json();
-  console.log("API response data:", data); // 追加
   return data.task as TaskDocument[];
 };
 
 export default async function MainPage() {
   const allTasks = await getAlltasks();
-  console.log("All tasks:", allTasks); // 追加
+
+  const sortedTasks = allTasks.sort((a: any, b: any) => {
+    if (a.isCompleted === b.isCompleted) {
+      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+    }
+    return a.isCompleted ? 1 : -1;
+  });
 
   return (
     <div className="p-8 h-full overflow-y-auto pb-24 bg-gray-400">
@@ -32,7 +37,7 @@ export default async function MainPage() {
         </Link>
       </header>
       <div className="mt-8 flex flex-wrap gap-4">
-        {allTasks.map((task) => (
+        {sortedTasks.map((task) => (
           <TaskCard key={task._id} task={task} />
         ))}
       </div>

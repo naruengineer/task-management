@@ -1,21 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { FormState } from "@/actions/task";
+import { completedTask, FormState } from "@/actions/task";
 import { useFormState, useFormStatus } from "react-dom";
-import { FaTrashAlt } from "react-icons/fa";
+import { IoFlag } from "react-icons/io5";
 import { deleteTask } from "@/actions/task";
+import { useEffect, useState } from "react";
 import Modal from "@/components/Modal/Modal";
 
-interface TaskDeleteButtonProps {
+interface TaskCompletedButtonProps {
   id: string;
 }
-
-const TaskDeleteButton: React.FC<TaskDeleteButtonProps> = ({ id }) => {
+const TaskCompletedButton: React.FC<TaskCompletedButtonProps> = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
-  const deleteTaskWithId = deleteTask.bind(null, id);
+  const completedTaskWithId = completedTask.bind(null, id);
   const initialState: FormState = { error: "" };
-  const [state, formAction] = useFormState(deleteTaskWithId, initialState);
+  const [state, formAction] = useFormState(completedTaskWithId, initialState);
 
   useEffect(() => {
     if (state && state.error !== "") {
@@ -27,12 +26,12 @@ const TaskDeleteButton: React.FC<TaskDeleteButtonProps> = ({ id }) => {
     const { pending } = useFormStatus();
     return (
       <button
-        type="button"
+        type="submit"
         disabled={pending}
-        className="hover:text-gray-700 text-lg cursor-pointer disabled:text-gray-400"
+        className="hover :text-gray-700 text-lg cursor-pointer disabled:text-gray-400"
         onClick={() => setShowModal(true)}
       >
-        <FaTrashAlt />
+        <IoFlag />
       </button>
     );
   };
@@ -48,20 +47,20 @@ const TaskDeleteButton: React.FC<TaskDeleteButtonProps> = ({ id }) => {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className="p-4 ">
-            <h2 className="text-lg font-semibold">削除確認</h2>
-            <p>※本当にこのタスクを削除しますか？</p>
+            <h2 className="text-lg font-semibold">完了確認</h2>
+            <p>※本当にこのタスクをやり切りましたか？</p>
             <div className="flex justify-center items-center gap-4 mt-4">
               <button
                 className="bg-gray-500 text-white px-4 py-2 rounded"
                 onClick={() => setShowModal(false)}
               >
-                キャンセル
+                まだやり残しがある。
               </button>
               <button
-                className="bg-red-500 text-white px-4 py-2 rounded"
+                className="bg-green-500 text-white px-4 py-2 rounded"
                 onClick={handleConfirmDelete}
               >
-                削除
+                やり切った！
               </button>
             </div>
           </div>
@@ -71,4 +70,4 @@ const TaskDeleteButton: React.FC<TaskDeleteButtonProps> = ({ id }) => {
   );
 };
 
-export default TaskDeleteButton;
+export default TaskCompletedButton;
