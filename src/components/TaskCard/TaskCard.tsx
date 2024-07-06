@@ -14,8 +14,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   }
   return (
     <div
-      className={`w-64 h-52 p-4 bg-white rounded-md shadow-md flex flex-col justify-between ${
-        task.isCompleted ? "bg-gray-500" : ""
+      className={`w-64 h-52 p-4 rounded-md shadow-md flex flex-col justify-between ${
+        task.isCompleted ? "bg-gray-500" : "bg-white "
       }`}
     >
       <header>
