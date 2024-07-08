@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import { ControlViewport } from "@/components/ViewPoint/controlViewPoint";

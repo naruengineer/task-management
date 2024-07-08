@@ -1,12 +1,40 @@
+"use client";
+
 import React from "react";
 import NavList from "../NavList/NavList";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
+import Link from "next/link";
 
 const SideMenu = () => {
+  const { data: session } = useSession();
   return (
     <div className="w-56 pt-8 bg-gray-800 text-white">
       <div>
-        <h1 className="px-4 text-2xl font-bold">Next.js tasks</h1>
-        <NavList />
+        <Link href="/" className="px-4 text-2xl font-bold">
+          Next.js tasks
+        </Link>
+        {session ? (
+          <div className="">
+            <NavList />
+            <div className="flex p-6 items-center w-full hover:bg-gray-700 font-medium">
+              <FaSignOutAlt color="blue" />
+              <button
+                onClick={() => signOut()}
+                className="py-2 px-1 font-bold "
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex p-6 items-center w-full hover:bg-gray-700 font-medium">
+            <FaSignInAlt color="green" />
+            <button onClick={() => signIn()} className="py-2 px-1 font-bold ">
+              Sign In
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

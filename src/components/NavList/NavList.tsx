@@ -19,7 +19,7 @@ const NavList = () => {
     {
       id: 1,
       label: "All Task",
-      link: "/",
+      link: "/alltask",
       icon: <FaTasks className="size-5" />,
     },
     {
@@ -48,7 +48,7 @@ const NavList = () => {
     },
   ];
   return (
-    <div className="mt-20 font-bold">
+    <div className="mt-14 font-bold">
       {navlist.map((item) => (
         <NavItem
           key={item.id}
