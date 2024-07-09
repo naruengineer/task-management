@@ -3,7 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { connectDB } from "@/utils/database";
 import { UserModel } from "@/models/user";
 
-export const handler = NextAuth({
+const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
