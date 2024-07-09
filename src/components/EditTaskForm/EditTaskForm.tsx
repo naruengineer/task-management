@@ -93,8 +93,8 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({ task }) => {
           </label>
         </div>
         <SubmitButton />
-        {state.error !== "" && (
-          <p className="mt-2 text-red-500 text-sm">{state.error}</p>
+        {state?.error ?? (
+          <p className="mt-2 text-red-500 text-sm">{state?.error}</p>
         )}
       </form>
     </div>

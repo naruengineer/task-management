@@ -70,7 +70,7 @@ export const updateTask = async (
   if (!session) {
     state.error = "認証されていません";
     console.error("Not authenticated");
-    return;
+    return state;
   }
 
   const userEmail = session.user?.email;
@@ -78,7 +78,7 @@ export const updateTask = async (
   if (!userEmail) {
     state.error = "ユーザー情報が見つかりません";
     console.error("ユーザー情報が見つかりません");
-    return;
+    return state;
   }
 
   await connectDB();
@@ -89,7 +89,7 @@ export const updateTask = async (
   if (!user) {
     state.error = "ユーザーが見つかりません";
     console.error("User not found");
-    return;
+    return state;
   }
 
   const userId = user._id;
@@ -110,6 +110,7 @@ export const updateTask = async (
     state.error = "タスクの更新に失敗しました";
     console.error(error);
   }
+  redirect("/alltask");
 };
 
 //タスク削除ボタンのロジック
