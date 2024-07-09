@@ -3,7 +3,6 @@
 import { completedTask, FormState } from "@/actions/task";
 import { useFormState, useFormStatus } from "react-dom";
 import { IoFlag } from "react-icons/io5";
-import { deleteTask } from "@/actions/task";
 import { useEffect, useState } from "react";
 import Modal from "@/components/Modal/Modal";
 

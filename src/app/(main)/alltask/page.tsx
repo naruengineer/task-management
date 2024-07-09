@@ -6,7 +6,7 @@ import { UserModel } from "@/models/user";
 import { getServerSession } from "next-auth";
 
 const getAlltasks = async (): Promise<TaskDocument[]> => {
-  const response = await fetch(`${process.env.API_URL}/tasks`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, {
     cache: "no-store",
   });
   if (response.status !== 200) {

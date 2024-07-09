@@ -4,9 +4,12 @@ import { getServerSession } from "next-auth";
 import { UserModel } from "@/models/user";
 
 const getExpiredtasks = async (): Promise<TaskDocument[]> => {
-  const response = await fetch(`${process.env.API_URL}/tasks/expired`, {
-    cache: "no-store",
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/tasks/expired`,
+    {
+      cache: "no-store",
+    }
+  );
   if (response.status !== 200) {
     throw new Error();
   }
