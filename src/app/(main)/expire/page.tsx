@@ -1,5 +1,7 @@
 import TaskCard from "@/components/TaskCard/TaskCard";
 import { TaskDocument } from "@/models/task";
+import { getServerSession } from "next-auth";
+import { UserModel } from "@/models/user";
 
 const getExpiredtasks = async (): Promise<TaskDocument[]> => {
   const response = await fetch(`${process.env.API_URL}/tasks/expired`, {
@@ -14,9 +16,23 @@ const getExpiredtasks = async (): Promise<TaskDocument[]> => {
 
 const ExpiredTaskpage = async () => {
   const expiredTasks = await getExpiredtasks();
+  const session = await getServerSession();
+  const userEmail = session?.user?.email; //ログインユーザーのメールアドレス
+  const user = await UserModel.findOne({ email: userEmail }); // 上記を利用してユーザーのObjectIdを取得
+  const userId = user._id.toString(); //ObjectId を挿入
+  console.log(userId);
+  console.log(expiredTasks);
 
-  const sortedExpiredTasks = expiredTasks.sort((a, b) => {
-    return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+  const sortedUserExpiredTasks = expiredTasks.filter((task) => {
+    return task.user === userId;
+  });
+  console.log(sortedUserExpiredTasks);
+
+  const sortedExpiredTasks = sortedUserExpiredTasks.sort((a: any, b: any) => {
+    if (a.isCompleted === b.isCompleted) {
+      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+    }
+    return a.isCompleted ? 1 : -1;
   });
 
   return (

@@ -2,6 +2,8 @@ import TaskCard from "@/components/TaskCard/TaskCard";
 import { TaskDocument } from "@/models/task";
 import Link from "next/link";
 import { MdAddTask } from "react-icons/md";
+import { UserModel } from "@/models/user";
+import { getServerSession } from "next-auth";
 
 const getAlltasks = async (): Promise<TaskDocument[]> => {
   const response = await fetch(`${process.env.API_URL}/tasks`, {
@@ -16,8 +18,19 @@ const getAlltasks = async (): Promise<TaskDocument[]> => {
 
 export default async function MainPage() {
   const allTasks = await getAlltasks();
+  const session = await getServerSession();
+  const userEmail = session?.user?.email; //ログインユーザーのメールアドレス
+  const user = await UserModel.findOne({ email: userEmail }); // 上記を利用してユーザーのObjectIdを取得
+  const userId = user._id.toString(); //ObjectId を挿入
+  console.log(userId);
+  console.log(allTasks);
 
-  const sortedTasks = allTasks.sort((a: any, b: any) => {
+  const sortedUserTasks = allTasks.filter((task) => {
+    return task.user === userId;
+  });
+  console.log(sortedUserTasks);
+
+  const sortedTasks = sortedUserTasks.sort((a: any, b: any) => {
     if (a.isCompleted === b.isCompleted) {
       return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
     }

@@ -1,10 +1,11 @@
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface Task {
   title: string;
   description: string;
   dueDate: string;
   isCompleted: boolean;
+  user: mongoose.Schema.Types.ObjectId;
 }
 
 export interface TaskDocument extends Task, Document {
@@ -30,9 +31,14 @@ const TaskSchema = new mongoose.Schema<TaskDocument>(
       type: Boolean,
       default: false,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
 export const TaskModel =
-  mongoose.models.Task || mongoose.model("Task", TaskSchema);
+  mongoose.models.Task || mongoose.model<TaskDocument>("Task", TaskSchema);

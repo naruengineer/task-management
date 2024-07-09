@@ -5,7 +5,10 @@ import { useFormState, useFormStatus } from "react-dom";
 
 const NewTaskForm = () => {
   const initialState: FormState = { error: "" };
-  const [state, formAction] = useFormState(createTask, initialState);
+  const [state, formAction] = useFormState(
+    createTask /*←　気にしない*/,
+    initialState
+  );
 
   const SubmitButton = () => {
     const { pending } = useFormStatus();
@@ -61,8 +64,8 @@ const NewTaskForm = () => {
           />
         </div>
         <SubmitButton />
-        {state.error && (
-          <p className="text-red-500 text-sm mt-2">{state.error}</p>
+        {state?.error ?? (
+          <p className="text-red-500 text-sm mt-2">{state?.error}</p>
         )}
       </form>
     </div>
