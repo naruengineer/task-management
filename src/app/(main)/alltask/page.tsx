@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MdAddTask } from "react-icons/md";
 import { UserModel } from "@/models/user";
 import { getServerSession } from "next-auth";
+import { UserDocument } from "../../../models/user";
 
 const getAlltasks = async (): Promise<TaskDocument[]> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, {
@@ -16,14 +17,29 @@ const getAlltasks = async (): Promise<TaskDocument[]> => {
   return data.task as TaskDocument[];
 };
 
+const getAllusers = async (): Promise<UserDocument[]> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+    cache: "no-store",
+  });
+  if (response.status !== 200) {
+    throw new Error("問題発生");
+  }
+  const data = await response.json();
+  console.log(data);
+  return data.user as UserDocument[];
+};
+
 export default async function MainPage() {
   const allTasks = await getAlltasks();
+  const allusers = await getAllusers();
   const session = await getServerSession();
+  console.log(allTasks);
+  console.log(allusers);
   console.log(session);
   const userEmail = session?.user?.email; //ログインユーザーのメールアドレス
   console.log(userEmail);
-  console.log(allTasks);
-  const user = await UserModel.find({ email: userEmail }); //ログインユーザーのアドレスに一致するユーザーを取得
+
+  const user = await UserModel.findOne({ email: userEmail }); //ログインユーザーのアドレスに一致するユーザーを取得
   console.log(user);
   const userId = user._id.toString(); //ログインユーザーのIDを取得し数字で抜き出す
   console.log(userId);
