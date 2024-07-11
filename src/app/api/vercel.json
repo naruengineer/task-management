@@ -1,24 +1,24 @@
 {
   "functions": {
-    "app/api/tasks/route.ts": {
+    "api/tasks/route.ts": {
       "maxDuration": 30
     },
-    "app/api/tasks/[id]/route.ts": {
+    "api/tasks/[id]/route.ts": {
       "maxDuration": 30
     },
-    "app/api/tasks/completed/route.ts": {
+    "api/tasks/completed/route.ts": {
       "maxDuration": 30
     },
-    "app/api/tasks/incompleted/route.ts": {
+    "api/tasks/incompleted/route.ts": {
       "maxDuration": 30
     },
-    "app/api/tasks/expired/route.ts": {
+    "api/tasks/expired/route.ts": {
       "maxDuration": 30
     },
-    "app/api/auth/[...nextauth]/route.ts": {
+    "api/auth/[...nextauth]/route.ts": {
       "maxDuration": 30
     },
-    "app/alltask/page.tsx": {
+    "alltask/page.tsx": {
       "maxDuration": 30
     }
   }
