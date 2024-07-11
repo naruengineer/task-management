@@ -1,7 +1,8 @@
 import TaskCard from "@/components/TaskCard/TaskCard";
 import { TaskDocument } from "@/models/task";
 import { getServerSession } from "next-auth";
-import { UserModel } from "@/models/user";
+import { UserModel, UserDocument } from "@/models/user";
+import { completedTask } from "../../../actions/task";
 
 const getCompletedtasks = async (): Promise<TaskDocument[]> => {
   const response = await fetch(
@@ -17,14 +18,32 @@ const getCompletedtasks = async (): Promise<TaskDocument[]> => {
   return data.task as TaskDocument[];
 };
 
+const getAllusers = async (): Promise<UserDocument[]> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+    cache: "no-store",
+  });
+  if (response.status !== 200) {
+    throw new Error("問題発生");
+  }
+  const data = await response.json();
+  console.log(data);
+  return data.user as UserDocument[];
+};
+
 const CompletedTaskpage = async () => {
   const completedTasks = await getCompletedtasks();
+  const allusers = await getAllusers();
   const session = await getServerSession();
-  const userEmail = session?.user?.email; //ログインユーザーのメールアドレス
-  const user = await UserModel.findOne({ email: userEmail }); // 上記を利用してユーザーのObjectIdを取得
-  const userId = user._id.toString(); //ObjectId を挿入
-  console.log(userId);
   console.log(completedTasks);
+  console.log(allusers);
+  console.log(session);
+  const userEmail = session?.user?.email;
+  console.log(userEmail); //　←　ログイン中のユーザーのアドレス
+  const currentUser = allusers.find((user) => {
+    return user.email === userEmail;
+  });
+  const userId = currentUser?._id;
+  console.log(userId);
 
   const sortedUserCompletedTasks = completedTasks.filter((task) => {
     return task.user === userId;

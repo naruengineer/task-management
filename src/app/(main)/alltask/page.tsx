@@ -2,7 +2,6 @@ import TaskCard from "@/components/TaskCard/TaskCard";
 import { TaskDocument } from "@/models/task";
 import Link from "next/link";
 import { MdAddTask } from "react-icons/md";
-import { UserModel } from "@/models/user";
 import { getServerSession } from "next-auth";
 import { UserDocument } from "../../../models/user";
 
@@ -43,6 +42,7 @@ export default async function MainPage() {
   });
   const userId = currentUser?._id;
   console.log(userId);
+
   const sortedUserTasks = allTasks.filter((task) => {
     return task.user === userId;
   });
