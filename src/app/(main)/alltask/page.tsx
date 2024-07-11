@@ -10,7 +10,7 @@ const getAlltasks = async (): Promise<TaskDocument[]> => {
     cache: "no-store",
   });
   if (response.status !== 200) {
-    throw new Error();
+    throw new Error("問題発生");
   }
   const data = await response.json();
   return data.task as TaskDocument[];
