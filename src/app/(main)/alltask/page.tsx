@@ -36,15 +36,13 @@ export default async function MainPage() {
   console.log(allTasks);
   console.log(allusers);
   console.log(session);
-  const userEmail = session?.user?.email; //ログインユーザーのメールアドレス
-  console.log(userEmail);
-
-  const user = await UserModel.findOne({ email: userEmail }); //ログインユーザーのアドレスに一致するユーザーを取得
-  console.log(user);
-  const userId = user._id.toString(); //ログインユーザーのIDを取得し数字で抜き出す
+  const userEmail = session?.user?.email;
+  console.log(userEmail); //　←　ログイン中のユーザーのアドレス
+  const currentUser = allusers.find((email: string) => {
+    return email === userEmail;
+  });
+  const userId = currentUser?._id;
   console.log(userId);
-  console.log(allTasks);
-
   const sortedUserTasks = allTasks.filter((task) => {
     return task.user === userId;
   });

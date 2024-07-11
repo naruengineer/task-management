@@ -7,10 +7,16 @@ export const GET = async () => {
     await connectDB();
     console.log("接続成功");
     const allusers: UserDocument[] = await UserModel.find();
-    return NextResponse.json({ message: "タスク取得成功", user: allusers });
+    return NextResponse.json({
+      message: "ユーザー情報取得成功",
+      user: allusers,
+    });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ message: "タスク取得失敗" }, { status: 500 });
+    return NextResponse.json(
+      { message: "ユーザー情報取得失敗" },
+      { status: 500 }
+    );
   }
 };
 
