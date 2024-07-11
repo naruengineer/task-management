@@ -38,8 +38,8 @@ export default async function MainPage() {
   console.log(session);
   const userEmail = session?.user?.email;
   console.log(userEmail); //　←　ログイン中のユーザーのアドレス
-  const currentUser = allusers.find((email: string) => {
-    return email === userEmail;
+  const currentUser = allusers.find((user) => {
+    return user.email === userEmail;
   });
   const userId = currentUser?._id;
   console.log(userId);
