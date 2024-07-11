@@ -4,7 +4,6 @@ import { UserModel } from "@/models/user";
 export const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DB_URI || "");
-    await UserModel.collection.createIndex({ email: 1 });
     console.log("接続成功");
   } catch (error) {
     console.log("DB接続に失敗しました");
