@@ -18,7 +18,7 @@
     "src/app/api/auth/[...nextauth]/route.ts": {
       "maxDuration": 30
     },
-    "src/app/alltask/page.tsx": {
+    "src/(main)/app/alltask/page.tsx": {
       "maxDuration": 30
     }
   }
