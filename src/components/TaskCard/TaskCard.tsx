@@ -1,7 +1,6 @@
 import { TaskDocument } from "@/models/task";
 import TaskDeleteButton from "./TaskDeleteButton/TaskDeleteButton";
 import TaskEditButton from "./TaskEditButton/TaskEditButton";
-import { useEffect } from "react";
 import TaskCompletedButton from "./TaskCompletedButton/TaskCompletedButton";
 
 interface TaskCardProps {

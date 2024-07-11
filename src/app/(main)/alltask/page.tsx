@@ -67,10 +67,10 @@ export default async function MainPage() {
           <div>Add Task</div>
         </Link>
       </header>
-      <div className="mt-8 flex flex-wrap gap-4">
-        {sortedTasks.map((task) => (
-          <TaskCard key={task._id} task={task} />
-        ))}
+      <div className="flex flex-col h-screen">
+        <div className="flex-1 bg-red-500">Section 1</div>
+        <div className="flex-1 bg-green-500">Section 2</div>
+        <div className="flex-1 bg-blue-500">Section 3</div>
       </div>
     </div>
   );
