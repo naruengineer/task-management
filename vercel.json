@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/tasks/route.tsx": {
+      "maxDuration": 30
+    }
+  }
+}
