@@ -7,7 +7,6 @@ export const GET = async () => {
     await connectDB();
     console.log("接続成功");
     const allTasks: TaskDocument[] = await TaskModel.find();
-    console.log(allTasks);
     return NextResponse.json({ message: "タスク取得成功", task: allTasks });
   } catch (error) {
     console.log(error);

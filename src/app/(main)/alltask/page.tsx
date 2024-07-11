@@ -23,7 +23,7 @@ export default async function MainPage() {
   const userEmail = session?.user?.email; //ログインユーザーのメールアドレス
   console.log(userEmail);
   console.log(allTasks);
-  const user = await UserModel.findOne({ email: userEmail }); //ログインユーザーのアドレスに一致するユーザーを取得
+  const user = await UserModel.find({ email: userEmail }); //ログインユーザーのアドレスに一致するユーザーを取得
   console.log(user);
   const userId = user._id.toString(); //ログインユーザーのIDを取得し数字で抜き出す
   console.log(userId);
