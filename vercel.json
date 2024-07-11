@@ -1,6 +1,18 @@
 {
   "functions": {
-    "api": {
+    "api/tasks/route.ts": {
+      "maxDuration": 30
+    },
+    "api/tasks/[id]/route.ts": {
+      "maxDuration": 30
+    },
+    "api/tasks/completed/route.ts": {
+      "maxDuration": 30
+    },
+    "api/tasks/incompleted/route.ts": {
+      "maxDuration": 30
+    },
+    "api/tasks/expired/route.ts": {
       "maxDuration": 30
     }
   }

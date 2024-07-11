@@ -2,8 +2,6 @@ import { TaskDocument, TaskModel } from "@/models/task";
 import { connectDB } from "@/utils/database";
 import { NextResponse } from "next/server";
 
-export const maxDuration = 20; //タイムアウトを20秒に設定
-
 export const GET = async () => {
   try {
     await connectDB();
