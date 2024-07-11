@@ -19,10 +19,11 @@ const getAlltasks = async (): Promise<TaskDocument[]> => {
 export default async function MainPage() {
   const allTasks = await getAlltasks();
   const session = await getServerSession();
+  console.log(session);
   const userEmail = session?.user?.email; //ログインユーザーのメールアドレス
-  console.log(session?.user?.email);
+  console.log(userEmail);
   console.log(allTasks);
-  const user = await UserModel.findOne({ email: userEmail }); // 上記を利用してユーザーのObjectIdを取得
+  const user = await UserModel.findOne({ email: userEmail }); //ログインユーザーの
   const userId = user._id.toString(); //ObjectId を挿入
   console.log(userId);
   console.log(allTasks);
