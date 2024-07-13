@@ -15,6 +15,17 @@ const SideMenu = () => {
           <Link href="/" className="px-4 text-2xl font-bold">
             Next.js tasks
           </Link>
+          {/* <div className="">
+            {session && session.user?.image && (
+              <img
+                src={session.user.image}
+                alt="User Image"
+                width={28}
+                height={28}
+                className="rounded-full"
+              />
+            )}
+          </div> */}
         </div>
 
         {session ? (
