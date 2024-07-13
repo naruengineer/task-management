@@ -16,7 +16,7 @@ const getAlltasks = async (): Promise<TaskDocument[]> => {
   return data.task as TaskDocument[];
 };
 
-const getAllusers = async (): Promise<UserDocument[]> => {
+export const getAllusers = async (): Promise<UserDocument[]> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
     cache: "no-store",
   });
@@ -43,16 +43,55 @@ export default async function MainPage() {
   const userId = currentUser?._id;
   console.log(userId);
 
+  //ログインしているユーザーのタスクのみを取得
   const sortedUserTasks = allTasks.filter((task) => {
     return task.user === userId;
   });
   console.log(sortedUserTasks);
 
+  //完了順に並び替え＋日付順に並び替え
   const sortedTasks = sortedUserTasks.sort((a: any, b: any) => {
     if (a.isCompleted === b.isCompleted) {
       return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
     }
     return a.isCompleted ? 1 : -1;
+  });
+
+  //昨日の日付を定義
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayDateString = yesterday.toISOString().split("T")[0];
+  //昨日のタスクの中で完了していないタスクを抽出
+  const yesterdayIncompletedTasks = sortedUserTasks.filter((task) => {
+    return task.dueDate === yesterdayDateString && !task.isCompleted;
+  });
+
+  //今日の日付を定義
+  const today = new Date();
+  const todayDateString = today.toISOString().split("T")[0];
+  //今日のタスクを抽出
+  const todayTasks = sortedUserTasks.filter((task) => {
+    return task.dueDate === todayDateString;
+  });
+
+  //明日の日付を定義
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowDateString = tomorrow.toISOString().split("T")[0];
+  //明日のタスクを抽出
+  const tomorrowTasks = sortedUserTasks.filter((task) => {
+    return task.dueDate === tomorrowDateString && !task.isCompleted;
+  });
+
+  //明後日の日付を定義
+  const theDayAfterTomorrow = new Date();
+  theDayAfterTomorrow.setDate(theDayAfterTomorrow.getDate() + 2);
+  const theDayAfterTomorrowDateString = theDayAfterTomorrow
+    .toISOString()
+    .split("T")[0];
+  //明後日以降のタスクを抽出
+  const theDayAfterTomorrowTasks = sortedUserTasks.filter((task) => {
+    return task.dueDate >= theDayAfterTomorrowDateString && !task.isCompleted;
   });
 
   return (
@@ -67,10 +106,39 @@ export default async function MainPage() {
           <div>Add Task</div>
         </Link>
       </header>
-      <div className="flex flex-col h-screen">
-        <div className="flex-1 bg-red-500">Section 1</div>
-        <div className="flex-1 bg-green-500">Section 2</div>
-        <div className="flex-1 bg-blue-500">Section 3</div>
+      <div className="flex h-screen">
+        <div className="flex-1 border-r-2 border-black pr-1">
+          <p className="text-red-500">Not achieved yesterday</p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            {yesterdayIncompletedTasks.map((task) => (
+              <TaskCard key={task._id} task={task} />
+            ))}
+          </div>
+        </div>
+        <div className="flex-1 border-r-2 border-black pr-1 ml-1">
+          <p className="">Today</p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            {todayTasks.map((task) => (
+              <TaskCard key={task._id} task={task} />
+            ))}
+          </div>
+        </div>
+        <div className="flex-1 border-r-2 border-black pr-1 ml-1">
+          <p>Tomorrow</p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            {tomorrowTasks.map((task) => (
+              <TaskCard key={task._id} task={task} />
+            ))}
+          </div>
+        </div>
+        <div className="flex-1 border-r-2 border-black pr-1 ml-1">
+          <p>The day after tomorrow</p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            {theDayAfterTomorrowTasks.map((task) => (
+              <TaskCard key={task._id} task={task} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

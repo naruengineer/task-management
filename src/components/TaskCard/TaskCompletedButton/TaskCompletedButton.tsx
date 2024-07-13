@@ -27,7 +27,7 @@ const TaskCompletedButton: React.FC<TaskCompletedButtonProps> = ({ id }) => {
       <button
         type="submit"
         disabled={pending}
-        className="hover :text-gray-700 text-lg cursor-pointer disabled:text-gray-400"
+        className="hover:text-gray-700 text-lg cursor-pointer disabled:text-gray-400"
         onClick={() => setShowModal(true)}
       >
         <IoFlag />

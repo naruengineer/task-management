@@ -47,10 +47,10 @@ const TaskDeleteButton: React.FC<TaskDeleteButtonProps> = ({ id }) => {
       <SubmitButton />
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <div className="p-4 ">
+          <div className="p-4">
             <h2 className="text-lg font-semibold">削除確認</h2>
             <p>※本当にこのタスクを削除しますか？</p>
-            <div className="flex justify-center items-center gap-4 mt-4">
+            <div className="flex justify-between items-center gap-4 mt-4">
               <button
                 className="bg-gray-500 text-white px-4 py-2 rounded"
                 onClick={() => setShowModal(false)}
@@ -61,7 +61,7 @@ const TaskDeleteButton: React.FC<TaskDeleteButtonProps> = ({ id }) => {
                 className="bg-red-500 text-white px-4 py-2 rounded"
                 onClick={handleConfirmDelete}
               >
-                削除
+                削除する
               </button>
             </div>
           </div>

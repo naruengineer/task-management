@@ -5,10 +5,7 @@ import { useFormState, useFormStatus } from "react-dom";
 
 const NewTaskForm = () => {
   const initialState: FormState = { error: "" };
-  const [state, formAction] = useFormState(
-    createTask /*←　気にしない*/,
-    initialState
-  );
+  const [state, formAction] = useFormState(createTask, initialState);
 
   const SubmitButton = () => {
     const { pending } = useFormStatus();

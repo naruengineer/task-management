@@ -5,7 +5,6 @@ import NavList from "../NavList/NavList";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
 import Link from "next/link";
-import Image from "next/image";
 
 const SideMenu = () => {
   const { data: session, status } = useSession();

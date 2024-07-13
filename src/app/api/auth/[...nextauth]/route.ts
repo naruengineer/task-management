@@ -33,20 +33,21 @@ const handler = NextAuth({
           name: profile?.name,
           email: profile?.email,
           image: user.image || "",
+          taskCompletedCount: 0,
         });
         await newUser.save();
       }
 
       return true;
     },
-    async session({ session, token }) {
-      // セッションにユーザー情報を追加
+    async session({ session, token, user }) {
       if (session.user) {
         session.user.email = token.id as string;
         session.user.image = token.image as string;
       }
       return session;
     },
+
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
