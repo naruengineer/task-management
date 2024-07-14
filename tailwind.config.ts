@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss";
-
-export const config: Config = {
+// tailwind.config.js
+// FreeBSD-licensed CSS animation by Animista
+module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -18,8 +18,21 @@ export const config: Config = {
           "tracking-in-expand-fwd-top 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both",
         "bounce-in-top": "bounce-in-top 1.1s ease both",
         "roll-in-left": "roll-in-left 0.6s ease both",
-        "fade-in-fwd":
-          "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both",
+        "fade-in-fwd-1":
+          "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both",
+        "fade-in-fwd-2":
+          "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 3s both",
+        "fade-in-fwd-3":
+          "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 3.5s both",
+        "tracking-in-contract":
+          "tracking-in-contract 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both",
+        "scale-in-center":
+          "scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+        "swirl-out-fwd": "swirl-out-fwd 0.6s ease both",
+        "scale-out-ver-bottom-1":
+          "scale-out-ver-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 1.5s  both",
+        "scale-out-ver-bottom-2":
+          "scale-out-ver-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 2s  both",
       },
       keyframes: {
         "tracking-in-expand-fwd-top": {
@@ -83,10 +96,53 @@ export const config: Config = {
             opacity: "1",
           },
         },
+        "tracking-in-contract": {
+          "0%": {
+            "letter-spacing": "1em",
+            opacity: "0",
+          },
+          "40%": {
+            opacity: ".6",
+          },
+          to: {
+            "letter-spacing": "normal",
+            opacity: "1",
+          },
+        },
+        "scale-in-center": {
+          "0%": {
+            transform: "scale(0)",
+            opacity: "1",
+          },
+          to: {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+        },
+        "swirl-out-fwd": {
+          "0%": {
+            transform: "rotate(0) scale(1)",
+            opacity: "1",
+          },
+          to: {
+            transform: "rotate(540deg) scale(5)",
+            opacity: "0",
+          },
+        },
+        "scale-out-ver-bottom": {
+          "0%": {
+            transform: "scaleY(1)",
+            "transform-origin": "0% 100%",
+            opacity: "1",
+          },
+          to: {
+            transform: "scaleY(0)",
+            "transform-origin": "0% 100%",
+            opacity: "1",
+          },
+        },
       },
     },
   },
   plugins: [],
 };
-
-export default config;
