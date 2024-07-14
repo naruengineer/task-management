@@ -31,7 +31,7 @@ const Page = async () => {
       </div>
       {session ? (
         <div className="text-2xl flex flex-col mt-40 items-center outline-dashed outline-2 outline-offset-2 rounded-lg p-4">
-          <h2 className="font-semibold text-gray-700 animate-fade-in-fwd-1">
+          <h2 className="font-semibold text-gray-700 animate-fade-in-fwd-0">
             達成したタスク数: {currentUserTaskCompletedCount}
           </h2>
         </div>

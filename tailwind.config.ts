@@ -18,6 +18,8 @@ module.exports = {
           "tracking-in-expand-fwd-top 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both",
         "bounce-in-top": "bounce-in-top 1.1s ease both",
         "roll-in-left": "roll-in-left 0.6s ease both",
+        "fade-in-fwd-0":
+          "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.5s both",
         "fade-in-fwd-1":
           "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both",
         "fade-in-fwd-2":
