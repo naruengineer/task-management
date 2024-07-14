@@ -108,10 +108,10 @@ export default async function MainPage() {
           <div>Add Task</div>
         </Link>
       </header>
-      <div className="flex h-screen">
+      <div className="flex h-200vh">
         <div className="flex-1 border-r-2 border-black pr-1">
           <p className="text-red-500">Not achieved yesterday</p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap gap-4 animate-heartbeat">
             {yesterdayIncompletedTasks.map((task) => (
               <TaskCard key={task._id} task={task} />
             ))}
@@ -136,7 +136,7 @@ export default async function MainPage() {
         <div className="flex-1 border-r-2 border-black pr-1 ml-1">
           <p>The day after tomorrow</p>
           <div className="mt-8 flex flex-wrap gap-4">
-            {theDayAfterTomorrowTasks.map((task) => (
+            {theDayAfterTomorrowTasks.slice(0, 5).map((task) => (
               <TaskCard key={task._id} task={task} />
             ))}
           </div>

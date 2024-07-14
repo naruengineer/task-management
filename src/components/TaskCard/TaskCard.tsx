@@ -13,6 +13,17 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   const yesterdayDateString = yesterday.toISOString().split("T")[0];
+  const today = new Date();
+  today.setDate(today.getDate());
+  const todayDateString = today.toISOString().split("T")[0];
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowDateString = tomorrow.toISOString().split("T")[0];
+  const theDayAfterTomorrow = new Date();
+  theDayAfterTomorrow.setDate(theDayAfterTomorrow.getDate() + 2);
+  const theDayAfterTomorrowDateString = theDayAfterTomorrow
+    .toISOString()
+    .split("T")[0];
   if (!task) {
     return <div>Loading...</div>; // ローディング中の表示
   }
@@ -24,6 +35,16 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           : task.dueDate <= yesterdayDateString
           ? "bg-red-400"
           : "bg-white"
+      }
+        ${task.dueDate === todayDateString ? "animate-scale-in-center-0" : ""}${
+        task.dueDate === tomorrowDateString
+          ? "animate-scale-in-center-1 bg-white"
+          : ""
+      }${
+        task.dueDate >= theDayAfterTomorrowDateString
+          ? "animate-scale-in-center-2 bg-white"
+          : ""
+      }
       }`}
     >
       <header>
