@@ -21,7 +21,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       className={`w-64 h-40 p-4 rounded-md shadow-md flex flex-col justify-between ${
         task.isCompleted
           ? "bg-gray-500"
-          : task.dueDate === yesterdayDateString
+          : task.dueDate <= yesterdayDateString
           ? "bg-red-400"
           : "bg-white"
       }`}

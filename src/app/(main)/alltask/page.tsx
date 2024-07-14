@@ -61,9 +61,9 @@ export default async function MainPage() {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   const yesterdayDateString = yesterday.toISOString().split("T")[0];
-  //昨日のタスクの中で完了していないタスクを抽出
+  //昨日以前のタスクの中で完了していないタスクを抽出
   const yesterdayIncompletedTasks = sortedUserTasks.filter((task) => {
-    return task.dueDate === yesterdayDateString && !task.isCompleted;
+    return task.dueDate <= yesterdayDateString && !task.isCompleted;
   });
 
   //今日の日付を定義
@@ -97,7 +97,9 @@ export default async function MainPage() {
   return (
     <div className="p-8 h-full overflow-y-auto pb-24 bg-gray-400">
       <header className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold flex items-center">All tasks</h1>
+        <h1 className="text-2xl font-bold flex items-center border-b-2 border-gray-800">
+          All tasks
+        </h1>
         <Link
           href="/new"
           className="flex items-center gap-1 font-semibold border px-4 py-2 rounded-full shadow-sm text-white bg-gray-800 hover :bg-gray-700"
