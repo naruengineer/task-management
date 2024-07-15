@@ -111,7 +111,7 @@ export default async function MainPage() {
       <div className="flex h-200vh">
         <div className="flex-1 border-r-2 border-black pr-1">
           <p className="text-red-500">Not achieved yesterday</p>
-          <div className="mt-8 flex flex-wrap gap-4 animate-heartbeat">
+          <div className="mt-8 flex flex-wrap gap-4">
             {yesterdayIncompletedTasks.map((task) => (
               <TaskCard key={task._id} task={task} />
             ))}

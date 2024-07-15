@@ -33,7 +33,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         task.isCompleted
           ? "bg-gray-500"
           : task.dueDate <= yesterdayDateString
-          ? "bg-red-400"
+          ? "bg-red-400 animate-heartbeat"
           : "bg-white"
       }
         ${task.dueDate === todayDateString ? "animate-scale-in-center-0" : ""}${
