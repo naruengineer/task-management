@@ -9,10 +9,13 @@ const TopPage = () => {
     <div className={styles.topPage}>
       <div>
         <div className="animate-scale-out-ver-bottom-1 mb-4">
-          積み重なる大量のタスクにもううんざり、、、
+          積み重なる大量のタスクにうんざり、、、
         </div>
-        <div className="animate-scale-out-ver-bottom-2">
-          そんな毎日から抜け出して効率的で充実した日々を送りましょう
+        <div className="animate-scale-out-ver-bottom-2 mb-4">
+          どのタスクから手を付けていいかわからない、、、
+        </div>
+        <div className="animate-scale-out-ver-bottom-3">
+          そんな毎日から抜け出して効率的で充実した日々を送りましょう。
         </div>
       </div>
 

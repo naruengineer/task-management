@@ -2,6 +2,8 @@ import TaskCard from "@/components/TaskCard/TaskCard";
 import { TaskDocument } from "@/models/task";
 import { getServerSession } from "next-auth";
 import { UserDocument } from "@/models/user";
+import Link from "next/link";
+import { MdAddTask } from "react-icons/md";
 
 const getExpiredtasks = async (): Promise<TaskDocument[]> => {
   const response = await fetch(
@@ -62,6 +64,13 @@ const ExpiredTaskpage = async () => {
         <h1 className="text-2xl font-bold flex items-center border-b-2 border-gray-800">
           Expired Tasks
         </h1>
+        <Link
+          href="/new"
+          className="flex items-center gap-1 font-semibold border px-4 py-2 rounded-full shadow-sm text-white bg-gray-800 hover :bg-gray-700"
+        >
+          <MdAddTask className="size-5" />
+          <div>Create Task</div>
+        </Link>
       </header>
       {expiredTasks.length === 0 ? (
         <p className="pt-5 font-semibold">No tasks available</p>

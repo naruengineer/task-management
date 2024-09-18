@@ -5,7 +5,7 @@ import { UserModel } from "@/models/user";
 import { connectDB } from "@/utils/database";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { getAllusers } from "@/app/(main)/alltask/page";
+import { getAllusers } from "@/components/GetDocuments/GetAllusers";
 
 export interface FormState {
   error: string;
@@ -196,5 +196,6 @@ export const copyTask = async (state: FormState, formData: FormData) => {
     state.error = "タスクの作成に失敗しました";
     console.error(error);
   }
+
   redirect("/alltask");
 };

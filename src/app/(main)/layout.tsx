@@ -32,7 +32,7 @@ const Mainlayout = ({
       <div className="flex h-screen">
         <ControlViewport />
         <SideMenu />
-        <main className="bg-gray-300 flex-1 overflow-auto">{children}</main>
+        <main className="bg-gray-200 flex-1 overflow-auto">{children}</main>
       </div>
     );
   } else {

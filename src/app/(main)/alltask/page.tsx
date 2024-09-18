@@ -1,32 +1,9 @@
 import TaskCard from "@/components/TaskCard/TaskCard";
-import { TaskDocument } from "@/models/task";
 import Link from "next/link";
 import { MdAddTask } from "react-icons/md";
 import { getServerSession } from "next-auth";
-import { UserDocument } from "../../../models/user";
-
-const getAlltasks = async (): Promise<TaskDocument[]> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, {
-    cache: "no-store",
-  });
-  if (response.status !== 200) {
-    throw new Error("問題発生");
-  }
-  const data = await response.json();
-  return data.task as TaskDocument[];
-};
-
-export const getAllusers = async (): Promise<UserDocument[]> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
-    cache: "no-store",
-  });
-  if (response.status !== 200) {
-    throw new Error("問題発生");
-  }
-  const data = await response.json();
-  console.log(data);
-  return data.user as UserDocument[];
-};
+import { getAlltasks } from "@/components/GetDocuments/GetAlltasks";
+import { getAllusers } from "@/components/GetDocuments/GetAllusers";
 
 export default async function MainPage() {
   const allTasks = await getAlltasks();
@@ -40,7 +17,7 @@ export default async function MainPage() {
   const currentUser = allusers.find((user) => {
     return user.email === userEmail;
   });
-  const userId = currentUser?._id;
+  const userId = currentUser?._id; //
   console.log(userId);
 
   //ログインしているユーザーのタスクのみを取得
@@ -62,7 +39,7 @@ export default async function MainPage() {
   yesterday.setDate(yesterday.getDate() - 1);
   const yesterdayDateString = yesterday.toISOString().split("T")[0];
   //昨日以前のタスクの中で完了していないタスクを抽出
-  const yesterdayIncompletedTasks = sortedUserTasks.filter((task) => {
+  const OverdueTasks = sortedUserTasks.filter((task) => {
     return task.dueDate <= yesterdayDateString && !task.isCompleted;
   });
 
@@ -105,14 +82,14 @@ export default async function MainPage() {
           className="flex items-center gap-1 font-semibold border px-4 py-2 rounded-full shadow-sm text-white bg-gray-800 hover :bg-gray-700"
         >
           <MdAddTask className="size-5" />
-          <div>Add Task</div>
+          <div>Create Task</div>
         </Link>
       </header>
       <div className="flex h-200vh">
         <div className="flex-1 border-r-2 border-black pr-1">
-          <p className="text-red-500">Not achieved yesterday</p>
+          <p className="text-red-500">Overdue Task</p>
           <div className="mt-8 flex flex-wrap gap-4">
-            {yesterdayIncompletedTasks.map((task) => (
+            {OverdueTasks.map((task) => (
               <TaskCard key={task._id} task={task} />
             ))}
           </div>

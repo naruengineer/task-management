@@ -21,11 +21,11 @@ module.exports = {
         "fade-in-fwd-0":
           "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.5s both",
         "fade-in-fwd-1":
-          "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both",
-        "fade-in-fwd-2":
           "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 3s both",
-        "fade-in-fwd-3":
+        "fade-in-fwd-2":
           "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 3.5s both",
+        "fade-in-fwd-3":
+          "fade-in-fwd 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 4s both",
         "tracking-in-contract":
           "tracking-in-contract 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both",
         "scale-in-center-0":
@@ -41,6 +41,8 @@ module.exports = {
           "scale-out-ver-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 1.5s both",
         "scale-out-ver-bottom-2":
           "scale-out-ver-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 2s both",
+        "scale-out-ver-bottom-3":
+          "scale-out-ver-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 2.5s both",
         "bounce-in-bottom": "bounce-in-bottom 1.1s ease both",
         heartbeat: "heartbeat 1.5s ease infinite both",
       },

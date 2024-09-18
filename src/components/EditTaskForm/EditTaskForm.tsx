@@ -28,7 +28,7 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({ task }) => {
         disabled={pending}
         className="mt-8 py-2 w-full rounded-md text-white bg-gray-800 hover:bg-gray-700 text-sm font-semibold shadow-sm disabled:bg-gray-400"
       >
-        {pending ? "now edit" : "edit"}
+        {pending ? "データベース接続中" : "edit"}
       </button>
     );
   };
